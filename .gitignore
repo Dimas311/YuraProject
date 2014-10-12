@@ -1,0 +1,24 @@
+# Maven
+target/
+classes/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+*/.idea/
+*/*.iml
+*/*.iws
+*/*.ipr
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Mac
+.DS_Store
+
+# NetBeans
+nb-configuration.xml
