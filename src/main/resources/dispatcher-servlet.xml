@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.sales"/>
+    <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true"/>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json"/>
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!-- Turn off working out content type based on URL file extension, should fall back to looking at the Accept headers -->
+        <property name="favorPathExtension" value="false"/>
+    </bean>
+
+    <!-- 404 | 500 -->
+    <mvc:view-controller path="/404.html" view-name="404"/>
+    <mvc:view-controller path="/500.html" view-name="500"/>
+
+    <!-- Search -->
+    <mvc:view-controller path="/site-map.html" view-name="site-map"/>
+
+    <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper">
+        <property name="serializationInclusion" value="NON_NULL"/>
+    </bean>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions" value="/WEB-INF/tiles/tiles.xml"/>
+        <property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"/>
+        <property name="validateDefinitions" value="true"/>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </bean>
+</beans>

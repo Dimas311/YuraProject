@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+	<!-- Templates -->
+    <definition name="baseSiteTemplate" template="/WEB-INF/templates/template.jsp">
+        <put-attribute name="title" value="Alprolix-HCP"/>
+        <put-attribute name="header" value="/WEB-INF/templates/header.jsp"/>
+        <put-attribute name="navigation" value="/WEB-INF/templates/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp"/>
+    </definition>
+
+    <definition name="default-content-layout" template='/WEB-INF/templates/content.jsp'>
+        <put-attribute name="content"/>
+    </definition>
+
+	<!-- 404 | 500 -->
+    <definition name="404" extends="baseSiteTemplate">
+        <put-attribute name="title" value="Page Not Found"/>
+        <put-attribute name="content">
+            <definition extends="default-content-layout">
+                <put-attribute name="content" value="/WEB-INF/pages/404.jsp"/>
+            </definition>
+        </put-attribute>
+    </definition>
+    
+	<definition name="500" extends="baseSiteTemplate">
+        <put-attribute name="title" value="Internal Server Error"/>
+        <put-attribute name="content">
+            <definition extends="default-content-layout">
+                <put-attribute name="content" value="/WEB-INF/pages/500.jsp"/>
+            </definition>
+        </put-attribute>
+    </definition>
+			
+
+	<!-- Search -->
+
+    <definition name="site-map" extends="baseSiteTemplate">
+        <put-attribute name="title" value="Site Map"/>
+        <put-attribute name="content">
+            <definition extends="default-content-layout">
+                <put-attribute name="content" value="/WEB-INF/pages/site-map.jsp"/>
+            </definition>
+        </put-attribute>
+    </definition>
+
+
+</tiles-definitions>

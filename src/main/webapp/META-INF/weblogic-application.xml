@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-application xmlns="http://www.bea.com/ns/weblogic/weblogic-application">
+    <application-param>
+        <param-name>webapp.encoding.default</param-name>
+        <param-value>UTF-8</param-value>
+    </application-param>
+    <prefer-application-packages>
+        <package-name>antlr.*</package-name>
+        <package-name>javax.persistence.*</package-name>
+        <package-name>org.springframework.*</package-name>
+        <package-name>org.hibernate.*</package-name>
+        <package-name>org.apache.*</package-name>
+        <package-name>com.ctc.wstx.*</package-name>
+    </prefer-application-packages>
+</weblogic-application>
